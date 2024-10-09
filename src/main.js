@@ -1,16 +1,18 @@
 // query selector variables go here 👇
-var posterImg = document.querySelector('.poster-img')
-var title = document.querySelector('.poster-title')
-var quote = document.querySelector('.poster-quote')
+var posterImg = document.querySelector('.poster-img');
+var title = document.querySelector('.poster-title');
+var quote = document.querySelector('.poster-quote');
 
-var mainPoster = document.querySelector('.main-poster')
-var posterForm = document.querySelector('.poster-form')
-var savedPosters = document.querySelector('.saved-posters')
-
-var showRandom = document.querySelector('.show-random')
-var showSaved = document.querySelector('.show-saved')
-var showForm = document.querySelector('.show-form')
-var savePoster = document.querySelector('.save-poster')
+var mainPoster = document.querySelector('.main-poster');
+var posterForm = document.querySelector('.poster-form');
+var savedPosters = document.querySelector('.saved-posters');
+//buttons
+var showRandom = document.querySelector('.show-random');
+var showSaved = document.querySelector('.show-saved');
+var showForm = document.querySelector('.show-form');
+var savePoster = document.querySelector('.save-poster');
+var showMain = document.querySelector('.show-main');
+var backToMain = document.querySelector('.back-to-main')
 
 var images = [
   { src: "./assets/bees.jpg", alt: "Bees at the entrance of an apiary." },
@@ -109,17 +111,24 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
-var savedPosters = [];
+var savedPostersArray = [];
 var currentPoster;
 
-// event listeners go here 👇
-window.addEventListener('load', setRandomContent)
-showRandom.addEventListener('click', setRandomContent)
-// functions and event handlers go here 👇
-// (we've provided two to get you started)!
+// event listeners go here
+window.addEventListener('load', () => {
+  showSection(mainPoster);
+  setRandomContent();
+});
+showRandom.addEventListener('click', setRandomContent);
+showForm.addEventListener('click', () => showSection(posterForm));
+showSaved.addEventListener('click', () => showSection(savedPosters));
+showMain.addEventListener('click', () => showSection(mainPoster));
+backToMain.addEventListener('click', () => showSection(mainPoster));
+
+// functions and event handlers go here
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length)
-}
+};
 
 function setRandomContent() {
   var randomImageIndex = getRandomIndex(images)
@@ -128,17 +137,15 @@ function setRandomContent() {
     posterImg.src = selectedImage.src;
     posterImg.alt = selectedImage.alt
   }
-
   var randomTitleIndex = getRandomIndex(titles)
   if (title) {
     title.textContent = titles[randomTitleIndex]
   }
-
   var randomQuoteIndex = getRandomIndex(quotes)
   if (quote) {
     quote.textContent = quotes[randomQuoteIndex]
   }
-}
+};
 
 function createPoster(imageURL, title, quote) {
   return {
@@ -146,7 +153,13 @@ function createPoster(imageURL, title, quote) {
     imageURL: imageURL, 
     title: title, 
     quote: quote}
-}
+};
 
+function showSection(sectionToShow) {
+  mainPoster.classList.add('hidden');
+  posterForm.classList.add('hidden');
+  savedPosters.classList.add('hidden');  
+  sectionToShow.classList.remove('hidden');
+}
 
 console.log("a;sldknf")
