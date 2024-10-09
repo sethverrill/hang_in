@@ -1,26 +1,36 @@
 // query selector variables go here 👇
+var posterImg = document.querySelector('.poster-img')
+var title = document.querySelector('.poster-title')
+var quote = document.querySelector('.poster-quote')
 
-// we've provided you with some data to work with 👇
-// tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
+var mainPoster = document.querySelector('.main-poster')
+var posterForm = document.querySelector('.poster-form')
+var savedPosters = document.querySelector('.saved-posters')
+
+var showRandom = document.querySelector('.show-random')
+var showSaved = document.querySelector('.show-saved')
+var showForm = document.querySelector('.show-form')
+var savePoster = document.querySelector('.save-poster')
+
 var images = [
-  "./assets/bees.jpg",
-  "./assets/bridge.jpg",
-  "./assets/butterfly.jpg",
-  "./assets/cliff.jpg",
-  "./assets/elephant.jpg",
-  "./assets/flock.jpg",
-  "./assets/fox.jpg",
-  "./assets/frog.jpg",
-  "./assets/horse.jpg",
-  "./assets/lion.jpg",
-  "./assets/mountain.jpg",
-  "./assets/pier.jpg",
-  "./assets/puffins.jpg",
-  "./assets/pug.jpg",
-  "./assets/runner.jpg",
-  "./assets/squirrel.jpg",
-  "./assets/tiger.jpg",
-  "./assets/turtle.jpg"
+  { src: "./assets/bees.jpg", alt: "Bees at the entrance of an apiary." },
+  { src: "./assets/bridge.jpg", alt: "Bridge lit up at night time." },
+  { src: "./assets/butterfly.jpg", alt: "Butterfly on a leaf." },
+  { src: "./assets/cliff.jpg", alt: "Person standing on a cliff edge with a mountain range in the distance." },
+  { src: "./assets/elephant.jpg", alt: "Two elephants in a meadow." },
+  { src: "./assets/flock.jpg", alt: "Flock of birds in the sky at sunrise with contrails in the background." },
+  { src: "./assets/fox.jpg", alt: "Red fox beside some flowers near a forest." },
+  { src: "./assets/frog.jpg", alt: "Frog on a leaf." },
+  { src: "./assets/horse.jpg", alt: "Six horses near a walking path with shrubbery around." },
+  { src: "./assets/lion.jpg", alt: "Yawning lion on grass." },
+  { src: "./assets/mountain.jpg", alt: "Person in front of camera with mountains in the distance." },
+  { src: "./assets/pier.jpg", alt: "Pier on a pond with hills in the background, surrounded by purple flowers." },
+  { src: "./assets/puffins.jpg", alt: "Puffins standing on a flowery hillside." },
+  { src: "./assets/pug.jpg", alt: "Pug wrapped in a blanket on a bed." },
+  { src: "./assets/runner.jpg", alt: "Person running toward the sun on a hillside road." },
+  { src: "./assets/squirrel.jpg", alt: "Squirrel coming down a tree toward the camera." },
+  { src: "./assets/tiger.jpg", alt: "Tiger laying on a rock with leaves in the background." },
+  { src: "./assets/turtle.jpg", alt: "Turtle swimming in water."}
 ];
 var titles = [
   "determination",
@@ -103,11 +113,31 @@ var savedPosters = [];
 var currentPoster;
 
 // event listeners go here 👇
-
+window.addEventListener('load', setRandomContent)
+showRandom.addEventListener('click', setRandomContent)
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
+  return Math.floor(Math.random() * array.length)
+}
+
+function setRandomContent() {
+  var randomImageIndex = getRandomIndex(images)
+  var selectedImage = images[randomImageIndex]
+  if (posterImg) {    
+    posterImg.src = selectedImage.src;
+    posterImg.alt = selectedImage.alt
+  }
+
+  var randomTitleIndex = getRandomIndex(titles)
+  if (title) {
+    title.textContent = titles[randomTitleIndex]
+  }
+
+  var randomQuoteIndex = getRandomIndex(quotes)
+  if (quote) {
+    quote.textContent = quotes[randomQuoteIndex]
+  }
 }
 
 function createPoster(imageURL, title, quote) {
@@ -117,3 +147,6 @@ function createPoster(imageURL, title, quote) {
     title: title, 
     quote: quote}
 }
+
+
+console.log("a;sldknf")
