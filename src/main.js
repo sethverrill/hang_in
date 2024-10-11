@@ -5,7 +5,7 @@ var quote = document.querySelector('.poster-quote');
 //sections
 var mainPoster = document.querySelector('.main-poster');
 var posterForm = document.querySelector('.poster-form');
-var posterImageUrl = document.querySelector('#poster-image-url')
+var posterImageUrl = document.querySelector('#poster-image-url');
 var posterTitleInput = document.querySelector('#poster-title');
 var posterQuoteInput = document.querySelector('#poster-quote');
 var savedPosters = document.querySelector('.saved-posters');
@@ -124,11 +124,12 @@ window.addEventListener('load', () => {
   setRandomContent();
 });
 showRandom.addEventListener('click', setRandomContent);
-showForm.addEventListener('click', () => showSection(posterForm));
 showSaved.addEventListener('click', () => showSection(savedPosters));
 showMain.addEventListener('click', () => showSection(mainPoster));
 backToMain.addEventListener('click', () => showSection(mainPoster));
-// makePosterBtn.addEventListener('click', makePoster);
+showForm.addEventListener('click', showFormView);
+showMain.addEventListener('click', showMainView);
+makePosterBtn.addEventListener('click', makePoster);
 
 // functions and event handlers go here
 function getRandomIndex(array) {
@@ -143,6 +144,12 @@ function createPoster(imageURL, title, quote) {
     quote: quote}
 };
 
+function initialSections() {
+  posterForm.classList.add('hidden');
+  savedPosters.classList.add('hidden');
+  mainPoster.classList.remove('hidden');
+}
+
 function setRandomContent() {
   var randomImage = images[getRandomIndex(images)]
   var randomTitle = titles[getRandomIndex(titles)]
@@ -155,15 +162,6 @@ function setRandomContent() {
     quote.textContent = poster.quote;    
 }
 
-
-
-// function showSection(sectionToShow) {
-//   mainPoster.classList.add('hidden');
-//   posterForm.classList.add('hidden');
-//   savedPosters.classList.add('hidden');  
-//   sectionToShow.classList.remove('hidden');
-// };
-
 function showSection(sectionToShow) {
   [mainPoster, posterForm, savedPosters].forEach(section => {
       if (section === sectionToShow) {
@@ -174,6 +172,35 @@ function showSection(sectionToShow) {
   });
 }
 
+function makePoster(event) {
+  event.preventDefault();
+  var imageURL = document.querySelector('#poster-image-url').value;
+  var posterTitle = document.querySelector('#poster-title').value;
+  var posterQuote = document.querySelector('#poster-quote').value;
 
+  currentPoster = createPoster(imageURL, posterTitle, posterQuote)
 
+  images.push(imageURL);
+  titles.push(posterTitle);
+  quotes.push(posterQuote);
+
+  // console.log('New poster created:', currentPoster);
+  // console.log('Images array:', images);
+  // console.log('Titles array:', titles);
+  // console.log('Quotes array:', quotes);
+
+  posterImg.src = currentPoster.imageURL;  
+  title.textContent = currentPoster.title;
+  quote.textContent = currentPoster.quote;
+
+  showSection(mainPoster)
+}
+
+function showFormView() {
+  showSection(posterForm);
+}
+
+function showMainView() {
+  showSection(mainPoster);
+}
 console.log("a;sldknf")
