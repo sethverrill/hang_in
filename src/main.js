@@ -130,6 +130,7 @@ backToMain.addEventListener('click', () => showSection(mainPoster));
 showForm.addEventListener('click', showFormView);
 showMain.addEventListener('click', showMainView);
 makePosterBtn.addEventListener('click', makePoster);
+savePoster.addEventListener('click', saveCurrentPoster)
 
 // functions and event handlers go here
 function getRandomIndex(array) {
@@ -156,8 +157,7 @@ function setRandomContent() {
   var randomQuote = quotes[getRandomIndex(quotes)]
   
   var poster = createPoster(randomImage, randomTitle, randomQuote); 
-    posterImg.src = poster.imageURL.src;
-    posterImg.alt = poster.imageURL.alt;  
+    posterImg.src = poster.imageURL.src;    
     title.textContent = poster.title;
     quote.textContent = poster.quote;    
 }
@@ -203,4 +203,20 @@ function showFormView() {
 function showMainView() {
   showSection(mainPoster);
 }
+
+//function to make 'save-poster' add  to the savedpostersarray
+// it will not save duplicate posters
+function saveCurrentPoster() {
+  var existingPoster = savedPostersArray.find(poster =>
+    posterImageUrl === currentPoster.imageURL &&
+    poster.title === currentPoster.title &&
+    poster.quote === currentPoster.quote
+  );
+  if(!existingPoster) {
+    savedPostersArray.push(currentPoster);
+  }
+}
+
+//when user clicks 'show saved poster' we should see the posters in the show posters grid
+//get styling to match the comp
 console.log("a;sldknf")
