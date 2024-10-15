@@ -149,8 +149,7 @@ button:hover {
 
 .unmotivational-posters {
   display: flex;
-  flex-direction: column;
-  margin: 55px;
+  flex-direction: column;  
 }
 
 .unmotivational-posters-grid {
@@ -168,9 +167,9 @@ button:hover {
   margin: 10px 10px;    
 }
 .unmotivational-posters .mini-poster img {  
-    height:200px;
-    width: 300px;
-    margin-bottom: 20px; 
+  height:200px;
+  width: 300px;
+  margin-bottom: 20px; 
 }
 .unmotivational-posters
 .mini-poster h2
