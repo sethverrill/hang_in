@@ -1,28 +1,26 @@
 //hang-in-there
-var posterImg = document.querySelector('.poster-img');
-var title = document.querySelector('.poster-title');
-var quote = document.querySelector('.poster-quote');
+const posterImg = document.querySelector('.poster-img');
+const title = document.querySelector('.poster-title');
+const quote = document.querySelector('.poster-quote');
+const mainPoster = document.querySelector('.main-poster');
+const posterForm = document.querySelector('.poster-form');
+const posterImageUrl = document.querySelector('#poster-image-url');
+const posterTitleInput = document.querySelector('#poster-title');
+const posterQuoteInput = document.querySelector('#poster-quote');
+const savedPosters = document.querySelector('.saved-posters');
+const savedPostersGrid = document.querySelector('.saved-posters-grid');
+const unmotivationalPosters = document.querySelector('.unmotivational-posters');
+const unmotivationalGrid = document.querySelector('.unmotivational-posters-grid');
+const showRandom = document.querySelector('.show-random');
+const showSaved = document.querySelector('.show-saved');
+const showForm = document.querySelector('.show-form');
+const savePoster = document.querySelector('.save-poster');
+const showMain = document.querySelector('.show-main');
+const makePosterBtn = document.querySelector('.make-poster');
+const showUnmotivationalBtn = document.querySelector('.show-unmotivational');
+const backToMain = document.querySelectorAll('.back-to-main');
 
-var mainPoster = document.querySelector('.main-poster');
-var posterForm = document.querySelector('.poster-form');
-var posterImageUrl = document.querySelector('#poster-image-url');
-var posterTitleInput = document.querySelector('#poster-title');
-var posterQuoteInput = document.querySelector('#poster-quote');
-var savedPosters = document.querySelector('.saved-posters');
-var savedPostersGrid = document.querySelector('.saved-posters-grid');
-var unmotivationalPosters = document.querySelector('.unmotivational-posters')
-var unmotivationalGrid = document.querySelector('.unmotivational-posters-grid')
-
-var showRandom = document.querySelector('.show-random');
-var showSaved = document.querySelector('.show-saved');
-var showForm = document.querySelector('.show-form');
-var savePoster = document.querySelector('.save-poster');
-var showMain = document.querySelector('.show-main');
-var makePosterBtn = document.querySelector('.make-poster');
-var showUnmotivationalBtn = document.querySelector('.show-unmotivational');
-var backToMain = document.querySelectorAll('.back-to-main');
-
-var images = [
+const images = [
   { src: "./assets/bees.jpg", alt: "Bees at the entrance of an apiary." },
   { src: "./assets/bridge.jpg", alt: "Bridge lit up at night time." },
   { src: "./assets/butterfly.jpg", alt: "Butterfly on a leaf." },
@@ -42,7 +40,7 @@ var images = [
   { src: "./assets/tiger.jpg", alt: "Tiger laying on a rock with leaves in the background." },
   { src: "./assets/turtle.jpg", alt: "Turtle swimming in water."}
 ];
-var titles = [
+const titles = [
   "determination",
   "success",
   "inspiration",
@@ -79,7 +77,7 @@ var titles = [
   "understanding",
   "wisdom"
 ];
-var quotes = [
+const quotes = [
   "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.",
   "You are braver than you believe, stronger than you seem and smarter than you think.",
   "You are confined only by the walls you build yourself.",
@@ -119,7 +117,7 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
-let unmotivationalPostersData = [
+const unmotivationalPostersData = [
   {
     name: "FAILURE",
     description: "Why bother trying? It's probably not worth it.",
@@ -242,9 +240,9 @@ let unmotivationalPostersData = [
   }
 ];
 
-var savedPostersArray = [];
-var currentPoster;
-var cleanedUnmotivational = cleanData(unmotivationalPostersData);
+let savedPostersArray = [];
+let currentPoster;
+const cleanedUnmotivational = cleanData(unmotivationalPostersData);
 console.log(cleanedUnmotivational)
 window.addEventListener('load', () => {
   showSection(mainPoster);
@@ -275,22 +273,15 @@ function createPoster(imageURL, title, quote) {
   }
 }
 
-function initialSections() {
-  posterForm.classList.add('hidden');
-  savedPosters.classList.add('hidden');
-  unmotivationalPosters.classList.add('hidden')
-  mainPoster.classList.remove('hidden');  
-}
-
 function cleanData(data) {
   return data.map(poster => createPoster(poster.img_url, poster.name, poster.description));
 }
 console.log(cleanData(unmotivationalPostersData))
 
 function setRandomContent() {
-  var randomImage = images[getRandomIndex(images)]
-  var randomTitle = titles[getRandomIndex(titles)]
-  var randomQuote = quotes[getRandomIndex(quotes)]
+  const randomImage = images[getRandomIndex(images)]
+  const randomTitle = titles[getRandomIndex(titles)]
+  const randomQuote = quotes[getRandomIndex(quotes)]
 
   currentPoster = createPoster(randomImage.src, randomTitle, randomQuote);  
   
@@ -313,9 +304,9 @@ function showSection(sectionToShow) {
 
 function makePoster(event) {
   event.preventDefault();
-  var imageURL = document.querySelector('#poster-image-url').value;
-  var posterTitle = document.querySelector('#poster-title').value;
-  var posterQuote = document.querySelector('#poster-quote').value;
+  const imageURL = document.querySelector('#poster-image-url').value;
+  const posterTitle = document.querySelector('#poster-title').value;
+  const posterQuote = document.querySelector('#poster-quote').value;
 
   currentPoster = createPoster(imageURL, posterTitle, posterQuote)  
   images.push({ src: imageURL, alt: "Custom image" });
@@ -327,7 +318,7 @@ function makePoster(event) {
   title.textContent = currentPoster.title;
   quote.textContent = currentPoster.quote;
 
-  showSection(mainPoster) 
+  showSection(mainPoster)
 }
 
 function resetPosterForm() {
@@ -356,7 +347,7 @@ function showUnmotivational() {
 }
 
 function saveCurrentPoster() {  
-  var existingPoster = savedPostersArray.find(poster =>
+  const existingPoster = savedPostersArray.find(poster =>
     poster.imageURL === currentPoster.imageURL &&
     poster.title === currentPoster.title &&
     poster.quote === currentPoster.quote
@@ -367,11 +358,18 @@ function saveCurrentPoster() {
   }
 }
 
+function deletePoster(posterElement, posters, index, posterDisplay) {
+  posterElement.addEventListener('dblclick', () => {
+    posters.splice(index, 1);
+    displayPosters(posters, posterDisplay);
+  });
+}
+
 function displayPosters(posters, posterDisplay) {
   posterDisplay.innerHTML = '';
 
   posters.forEach((poster, index) => {  
-    var posterElement = document.createElement('div');
+    const posterElement = document.createElement('div');
     posterElement.classList.add('mini-poster');
     posterElement.innerHTML = `
       <img src="${poster.imageURL}" alt="${poster.alt}">
@@ -379,10 +377,7 @@ function displayPosters(posters, posterDisplay) {
       <h4>${poster.quote}</h4>
     `;
 
-    posterElement.addEventListener('dblclick', () => {
-      posters.splice(index, 1);
-      displayPosters(posters, posterDisplay);
-    });
+    deletePoster(posterElement, posters, index, posterDisplay)
 
     posterDisplay.appendChild(posterElement);
   });  
