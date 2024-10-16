@@ -1,46 +1,32 @@
-# Hang In There
-
-A boilerplate repo. 
-
-## Set Up
-
-1. Fork this repository
-2. Clone down your new, forked repo
-3. `cd` into the repository
-4. Open it in your text editor
-5. Add the instructors as collaborators on the repository
-
-Project spec & rubric can be found [here](https://curriculum.turing.edu/module2/projects/hang-in-there/index)
-
-To view your project:
-
-1. In your terminal, navigate to your project repo
-2. Run the command `open index.html`
-  
-______________________________________________________  
-# README Template  
-Before turning this project in, erase this line and everything above it and fill in the info below.  
 ______________________________________________________  
 
 # Hang in There  
 
 ### Abstract:
-[//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
+[//]:  This app allows you to create motivational posters using pre-entered data at random, or create your own motivational poster by entering an image and details to your satisfation.  
+Beyond that the app also has an unmotivationl posters section for the days you just don't want motivation.
 
 ### Installation Instructions:
-[//]: <> (What steps does a person have to take to get your app cloned down and running?)
+[//]:  To use this app, clone it to your own machine via the 'Code' button. Once you're in the file locally run the command `open index.html`
 
 ### Preview of App:
-[//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off. gifs preferred!)
+[//]: Deleting posters from the app:
+
+
+ ![Delete Function](assets/delete_saved.gif)
 
 ### Context:
-[//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
+[//]: This project was created over the course of a week as a Module Two assignment in my seventh and eigth weeks at Turing.
 
 ### Contributors:
-[//]: <> (Who worked on this application? Link to your GitHub. Consider also providing LinkedIn link)
+[//]: I was the sole contributor to this project.
 
 ### Learning Goals:
-[//]: <> (What were the learning goals of this project? What tech did you work with?)
+[//]: My learning goals for this project were to write DRY JavaScript and use CSS and HTML to match styling and layout comps.
+
+I feel good about my growth across this project. There's certainly room for improvement, but I was able to accomplish most of my stretch goals.
 
 ### Wins + Challenges:
-[//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
+[//]: My wins and challenges went hand in hand on this project. It was important to me to have descriptive alts for all my images. Because I added these alts to the images early, I created a lot of stumbling blocks for myself which were fun to work out solutions for.
+
+I did a lot of things based on the MDN docs for this project which made me question if there were better ways to do the same thing. I was able to find a lot of things that weren't explicitly spelled out in the docs by researching each method more deeply.
